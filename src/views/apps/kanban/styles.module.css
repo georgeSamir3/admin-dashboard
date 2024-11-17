@@ -6,9 +6,12 @@
   .drag {
     display: none;
     cursor: grab;
-    &:active {
+    /* &:active {
       cursor: grabbing;
-    }
+    } */
+  }
+  .drag:active {
+    cursor: grabbing;
   }
 }
 

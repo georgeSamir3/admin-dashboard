@@ -10,7 +10,7 @@
     box-shadow 0.2s ease-in-out;
   border-block-end: 1px solid var(--mui-palette-divider);
 
-  &:hover {
+  /* &:hover {
     box-shadow: var(--mui-customShadows-sm);
     border-color: transparent;
     .emailInfo:not(.show) {
@@ -21,6 +21,18 @@
       align-items: center;
       gap: 0.25rem;
     }
+  } */
+}
+.emailList:hover {
+  box-shadow: var(--mui-customShadows-sm);
+  border-color: transparent;
+  .emailInfo:not(.show) {
+    display: none !important;
+  }
+  .emailActions {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
   }
 }
 
