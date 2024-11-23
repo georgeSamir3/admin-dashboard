@@ -64,10 +64,10 @@ const VerticalMenu = ({ dictionary, scrollMenu }) => {
         menuSectionStyles={menuSectionStyles(verticalNavOptions, theme)}
       >
         <MenuItem
-          href={`/${locale}/dashboards/crm`}
+          href={`/${locale}/dashboard`}
           icon={<i className='tabler-home' />}
           // exactMatch={false}
-          activeUrl='/dashboards/crm'
+          activeUrl='/dashboard'
         >
           Dashboard
         </MenuItem>
