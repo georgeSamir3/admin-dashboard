@@ -8,8 +8,8 @@ import Link from 'next/link'
 import { useParams } from 'next/navigation'
 
 // MUI Imports
-import useMediaQuery from '@mui/material/useMediaQuery'
-import { styled, useTheme } from '@mui/material/styles'
+import Card from '@mui/material/Card'
+import CardContent from '@mui/material/CardContent'
 import Typography from '@mui/material/Typography'
 import IconButton from '@mui/material/IconButton'
 import InputAdornment from '@mui/material/InputAdornment'
@@ -18,108 +18,36 @@ import Button from '@mui/material/Button'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Divider from '@mui/material/Divider'
 
-// Third-party Imports
-import classnames from 'classnames'
-
 // Component Imports
 import Logo from '@components/layout/shared/Logo'
 import CustomTextField from '@core/components/mui/TextField'
 
-// Hook Imports
-import { useImageVariant } from '@core/hooks/useImageVariant'
-import { useSettings } from '@core/hooks/useSettings'
-
 // Util Imports
 import { getLocalizedUrl } from '@/utils/i18n'
-import { useRouter } from 'next/navigation'
-// Styled Custom Components
-const RegisterIllustration = styled('img')(({ theme }) => ({
-  zIndex: 2,
-  blockSize: 'auto',
-  maxBlockSize: 600,
-  maxInlineSize: '100%',
-  margin: theme.spacing(12),
-  [theme.breakpoints.down(1536)]: {
-    maxBlockSize: 550
-  },
-  [theme.breakpoints.down('lg')]: {
-    maxBlockSize: 450
-  }
-}))
 
-const MaskImg = styled('img')({
-  blockSize: 'auto',
-  maxBlockSize: 345,
-  inlineSize: '100%',
-  position: 'absolute',
-  insetBlockEnd: 0,
-  zIndex: -1
-})
+// Styled Component Imports
+import AuthIllustrationWrapper from './AuthIllustrationWrapper'
 
-const Register = ({ mode }) => {
+const RegisterV1 = () => {
   // States
   const [isPasswordShown, setIsPasswordShown] = useState(false)
 
-  // Vars
-  const darkImg = '/images/pages/auth-mask-dark.png'
-  const lightImg = '/images/pages/auth-mask-light.png'
-  const darkIllustration = '/images/illustrations/auth/v2-register-dark.png'
-  const lightIllustration = '/images/illustrations/auth/v2-register-light.png'
-  const borderedDarkIllustration = '/images/illustrations/auth/v2-register-dark-border.png'
-  const borderedLightIllustration = '/images/illustrations/auth/v2-register-light-border.png'
-
   // Hooks
   const { lang: locale } = useParams()
-  const { settings } = useSettings()
-  const theme = useTheme()
-  const hidden = useMediaQuery(theme.breakpoints.down('md'))
-  const authBackground = useImageVariant(mode, lightImg, darkImg)
-  const router = useRouter()
-
-  const characterIllustration = useImageVariant(
-    mode,
-    lightIllustration,
-    darkIllustration,
-    borderedLightIllustration,
-    borderedDarkIllustration
-  )
-
   const handleClickShowPassword = () => setIsPasswordShown(show => !show)
 
   return (
-    <div className='flex bs-full justify-center'>
-      <div
-        className={classnames(
-          'flex bs-full items-center justify-center flex-1 min-bs-[100dvh] relative p-6 max-md:hidden',
-          {
-            'border-ie': settings.skin === 'bordered'
-          }
-        )}
-      >
-        <RegisterIllustration src={characterIllustration} alt='character-illustration' />
-        {!hidden && <MaskImg alt='mask' src={authBackground} />}
-      </div>
-      <div className='flex justify-center items-center bs-full bg-backgroundPaper !min-is-full p-6 md:!min-is-[unset] md:p-12 md:is-[480px]'>
-        <Link
-          href={getLocalizedUrl('/login', locale)}
-          className='absolute block-start-5 sm:block-start-[33px] inline-start-6 sm:inline-start-[38px]'
-        >
-          <Logo />
-        </Link>
-        <div className='flex flex-col gap-6 is-full sm:is-auto md:is-full sm:max-is-[400px] md:max-is-[unset] mbs-8 sm:mbs-11 md:mbs-0'>
-          <div className='flex flex-col gap-1'>
+    <AuthIllustrationWrapper>
+      <Card className='flex flex-col sm:is-[450px]'>
+        <CardContent className='sm:!p-12'>
+          <Link href={getLocalizedUrl('/', locale)} className='flex justify-center mbe-6'>
+            <Logo />
+          </Link>
+          <div className='flex flex-col gap-1 mbe-6'>
             <Typography variant='h4'>Adventure starts here 🚀</Typography>
             <Typography>Make your app management easy and fun!</Typography>
           </div>
-          <form
-            noValidate
-            autoComplete='off'
-            onSubmit={e => {
-              e.preventDefault()
-              router.push('pages/auth/verify-email-v2')
-            }}
-            className='flex flex-col gap-6'
-          >
+          <form noValidate autoComplete='off' onSubmit={e => e.preventDefault()} className='flex flex-col gap-6'>
             <CustomTextField autoFocus fullWidth label='Username' placeholder='Enter your username' />
             <CustomTextField fullWidth label='Email' placeholder='Enter your email' />
             <CustomTextField
@@ -153,11 +81,11 @@ const Register = ({ mode }) => {
             </Button>
             <div className='flex justify-center items-center flex-wrap gap-2'>
               <Typography>Already have an account?</Typography>
-              <Typography component={Link} href={getLocalizedUrl('/login', locale)} color='primary'>
+              <Typography component={Link} href={getLocalizedUrl('/pages/auth/login-v1', locale)} color='primary'>
                 Sign in instead
               </Typography>
             </div>
-            <Divider className='gap-2'>or</Divider>
+            <Divider className='gap-2 text-textPrimary'>or</Divider>
             <div className='flex justify-center items-center gap-1.5'>
               <IconButton className='text-facebook' size='small'>
                 <i className='tabler-brand-facebook-filled' />
@@ -173,10 +101,10 @@ const Register = ({ mode }) => {
               </IconButton>
             </div>
           </form>
-        </div>
-      </div>
-    </div>
+        </CardContent>
+      </Card>
+    </AuthIllustrationWrapper>
   )
 }
 
-export default Register
+export default RegisterV1

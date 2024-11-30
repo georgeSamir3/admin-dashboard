@@ -1,30 +1,39 @@
 'use client'
 
+// React Imports
+import { useState } from 'react'
+
 // Next Imports
 import { useParams } from 'next/navigation'
 
 // MUI Imports
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { styled, useTheme } from '@mui/material/styles'
-import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
+import Typography from '@mui/material/Typography'
 
 // Third-party Imports
+import { OTPInput } from 'input-otp'
 import classnames from 'classnames'
 
 // Component Imports
+// import Form from '@components/Form'
+import Form from '@components/Form'
 import Link from '@components/Link'
 import Logo from '@components/layout/shared/Logo'
 
 // Hook Imports
 import { useImageVariant } from '@core/hooks/useImageVariant'
 import { useSettings } from '@core/hooks/useSettings'
-import { useRouter } from 'next/navigation'
+
 // Util Imports
 import { getLocalizedUrl } from '@/utils/i18n'
 
+// Style Imports
+import styles from '@/libs/styles/inputOtp.module.css'
+
 // Styled Custom Components
-const VerifyEmailIllustration = styled('img')(({ theme }) => ({
+const TwoStepsIllustration = styled('img')(({ theme }) => ({
   zIndex: 2,
   blockSize: 'auto',
   maxBlockSize: 650,
@@ -47,12 +56,32 @@ const MaskImg = styled('img')({
   zIndex: -1
 })
 
-const VerifyEmailV2 = ({ mode }) => {
+const Slot = props => {
+  return (
+    <div className={classnames(styles.slot, { [styles.slotActive]: props.isActive })}>
+      {props.char !== null && <div>{props.char}</div>}
+      {props.hasFakeCaret && <FakeCaret />}
+    </div>
+  )
+}
+
+const FakeCaret = () => {
+  return (
+    <div className={styles.fakeCaret}>
+      <div className='w-px h-5 bg-textPrimary' />
+    </div>
+  )
+}
+
+const TwoStepsV2 = ({ mode }) => {
+  // States
+  const [otp, setOtp] = useState(null)
+
   // Vars
   const darkImg = '/images/pages/auth-mask-dark.png'
   const lightImg = '/images/pages/auth-mask-light.png'
-  const darkIllustration = '/images/illustrations/auth/v2-verify-email-dark.png'
-  const lightIllustration = '/images/illustrations/auth/v2-verify-email-light.png'
+  const darkIllustration = '/images/illustrations/auth/v2-two-steps-dark.png'
+  const lightIllustration = '/images/illustrations/auth/v2-two-steps-light.png'
 
   // Hooks
   const { settings } = useSettings()
@@ -61,7 +90,7 @@ const VerifyEmailV2 = ({ mode }) => {
   const hidden = useMediaQuery(theme.breakpoints.down('md'))
   const authBackground = useImageVariant(mode, lightImg, darkImg)
   const characterIllustration = useImageVariant(mode, lightIllustration, darkIllustration)
-  const router = useRouter()
+
   return (
     <div className='flex bs-full justify-center'>
       <div
@@ -72,7 +101,7 @@ const VerifyEmailV2 = ({ mode }) => {
           }
         )}
       >
-        <VerifyEmailIllustration src={characterIllustration} alt='character-illustration' />
+        <TwoStepsIllustration src={characterIllustration} alt='character-illustration' />
         {!hidden && (
           <MaskImg
             alt='mask'
@@ -90,35 +119,45 @@ const VerifyEmailV2 = ({ mode }) => {
         </Link>
         <div className='flex flex-col gap-6 is-full sm:is-auto md:is-full sm:max-is-[400px] md:max-is-[unset] mbs-11 sm:mbs-14 md:mbs-0'>
           <div className='flex flex-col gap-1'>
-            <Typography variant='h4'>Verify your email ✉️</Typography>
+            <Typography variant='h4'>Two Step Verification 💬</Typography>
             <Typography>
-              Account activation link sent to your email address:{' '}
-              <span className='font-medium text-textPrimary'>john.doe@email.com</span> Please follow the link inside to
-              continue.
+              We sent a verification code to your mobile. Enter the code from the mobile in the field below.
+            </Typography>
+            <Typography className='font-medium' color='text.primary'>
+              ******1234
             </Typography>
           </div>
-          <Button
-            fullWidth
-            variant='contained'
-            type='submit'
-            className='mbe-5'
-            onClick={e => {
-              e.preventDefault()
-              router.push('/')
-            }}
-          >
-            Skip For Now
-          </Button>
-          <div className='flex justify-center items-center flex-wrap gap-2'>
-            <Typography>Didn&#39;t get the mail?</Typography>
-            <Typography color='primary' component={Link}>
-              Resend
-            </Typography>
-          </div>
+          <Form noValidate autoComplete='off' className='flex flex-col gap-6'>
+            <div className='flex flex-col gap-2'>
+              <Typography>Type your 6 digit security code</Typography>
+              <OTPInput
+                onChange={setOtp}
+                value={otp ?? ''}
+                maxLength={6}
+                containerClassName='group flex items-center'
+                render={({ slots }) => (
+                  <div className='flex items-center justify-between w-full gap-4'>
+                    {slots.slice(0, 6).map((slot, idx) => (
+                      <Slot key={idx} {...slot} />
+                    ))}
+                  </div>
+                )}
+              />
+            </div>
+            <Button fullWidth variant='contained' type='submit'>
+              Verify my account
+            </Button>
+            <div className='flex justify-center items-center flex-wrap gap-2'>
+              <Typography>Didn&#39;t get the code?</Typography>
+              <Typography color='primary' component={Link} href='/' onClick={e => e.preventDefault()}>
+                Resend
+              </Typography>
+            </div>
+          </Form>
         </div>
       </div>
     </div>
   )
 }
 
-export default VerifyEmailV2
+export default TwoStepsV2

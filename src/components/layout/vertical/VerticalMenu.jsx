@@ -84,7 +84,7 @@ const VerticalMenu = ({ dictionary, scrollMenu }) => {
           <MenuItem href={`/${locale}/apps/chat`} icon={<i className='tabler-message-circle-2' />}>
             {dictionary['navigation'].chat}
           </MenuItem>
-          <SubMenu label={dictionary['navigation'].authPages} icon={<i className='tabler-shield-lock' />}>
+          {/* <SubMenu label={dictionary['navigation'].authPages} icon={<i className='tabler-shield-lock' />}>
             <SubMenu label={dictionary['navigation'].login}>
               <MenuItem href={`/${locale}/pages/auth/login-v1`} target='_blank'>
                 {dictionary['navigation'].loginV1}
@@ -136,7 +136,7 @@ const VerticalMenu = ({ dictionary, scrollMenu }) => {
                 {dictionary['navigation'].twoStepsV2}
               </MenuItem>
             </SubMenu>
-          </SubMenu>
+          </SubMenu> */}
         </MenuSection>
       </Menu>
       {/* <Menu

@@ -4,7 +4,8 @@
 import { useState } from 'react'
 
 // Next Imports
-import { useRouter } from 'next/navigation'
+import Link from 'next/link'
+import { useParams } from 'next/navigation'
 
 // MUI Imports
 import useMediaQuery from '@mui/material/useMediaQuery'
@@ -21,7 +22,6 @@ import Divider from '@mui/material/Divider'
 import classnames from 'classnames'
 
 // Component Imports
-import Link from '@components/Link'
 import Logo from '@components/layout/shared/Logo'
 import CustomTextField from '@core/components/mui/TextField'
 
@@ -31,6 +31,10 @@ import themeConfig from '@configs/themeConfig'
 // Hook Imports
 import { useImageVariant } from '@core/hooks/useImageVariant'
 import { useSettings } from '@core/hooks/useSettings'
+
+// Util Imports
+import { getLocalizedUrl } from '@/utils/i18n'
+
 // Styled Custom Components
 const LoginIllustration = styled('img')(({ theme }) => ({
   zIndex: 2,
@@ -68,7 +72,7 @@ const LoginV2 = ({ mode }) => {
   const borderedLightIllustration = '/images/illustrations/auth/v2-login-light-border.png'
 
   // Hooks
-  const router = useRouter()
+  const { lang: locale } = useParams()
   const { settings } = useSettings()
   const theme = useTheme()
   const hidden = useMediaQuery(theme.breakpoints.down('md'))
@@ -104,7 +108,10 @@ const LoginV2 = ({ mode }) => {
         )}
       </div>
       <div className='flex justify-center items-center bs-full bg-backgroundPaper !min-is-full p-6 md:!min-is-[unset] md:p-12 md:is-[480px]'>
-        <Link className='absolute block-start-5 sm:block-start-[33px] inline-start-6 sm:inline-start-[38px]'>
+        <Link
+          href={getLocalizedUrl('/', locale)}
+          className='absolute block-start-5 sm:block-start-[33px] inline-start-6 sm:inline-start-[38px]'
+        >
           <Logo />
         </Link>
         <div className='flex flex-col gap-6 is-full sm:is-auto md:is-full sm:max-is-[400px] md:max-is-[unset] mbs-11 sm:mbs-14 md:mbs-0'>
@@ -112,16 +119,7 @@ const LoginV2 = ({ mode }) => {
             <Typography variant='h4'>{`Welcome to ${themeConfig.templateName}! 👋🏻`}</Typography>
             <Typography>Please sign-in to your account and start the adventure</Typography>
           </div>
-          <form
-            noValidate
-            autoComplete='off'
-            onSubmit={e => {
-              e.preventDefault()
-              // router.push('/')
-              router.push('pages/auth/two-steps-v2')
-            }}
-            className='flex flex-col gap-5'
-          >
+          <form noValidate autoComplete='off' onSubmit={e => e.preventDefault()} className='flex flex-col gap-6'>
             <CustomTextField autoFocus fullWidth label='Email or Username' placeholder='Enter your email or username' />
             <CustomTextField
               fullWidth
@@ -145,38 +143,19 @@ const LoginV2 = ({ mode }) => {
                 className='text-end'
                 color='primary'
                 component={Link}
-                onClick={e => {
-                  e.preventDefault()
-                  router.push('/forgot-password')
-                }}
+                href={getLocalizedUrl('/pages/auth/forgot-password-v2', locale)}
               >
                 Forgot password?
               </Typography>
-              {/* <Link>Forgot password?</Link> */}
             </div>
             <Button fullWidth variant='contained' type='submit'>
               Login
             </Button>
             <div className='flex justify-center items-center flex-wrap gap-2'>
               <Typography>New on our platform?</Typography>
-              {/* <Typography
-                component={Link}
-                color='primary'
-                onClick={() => {
-                  router.push('/register')
-                }}
-              >
+              <Typography component={Link} href={getLocalizedUrl('/pages/auth/register-v2', locale)} color='primary'>
                 Create an account
-              </Typography> */}
-              <Button
-                variant='text'
-                onClick={e => {
-                  e.preventDefault()
-                  router.push('/register')
-                }}
-              >
-                Create an account
-              </Button>
+              </Typography>
             </div>
             <Divider className='gap-2 text-textPrimary'>or</Divider>
             <div className='flex justify-center items-center gap-1.5'>

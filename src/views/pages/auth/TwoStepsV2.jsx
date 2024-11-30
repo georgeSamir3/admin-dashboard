@@ -5,7 +5,7 @@ import { useState } from 'react'
 
 // Next Imports
 import { useParams } from 'next/navigation'
-
+import { useRouter } from 'next/navigation'
 // MUI Imports
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { styled, useTheme } from '@mui/material/styles'
@@ -90,7 +90,7 @@ const TwoStepsV2 = ({ mode }) => {
   const hidden = useMediaQuery(theme.breakpoints.down('md'))
   const authBackground = useImageVariant(mode, lightImg, darkImg)
   const characterIllustration = useImageVariant(mode, lightIllustration, darkIllustration)
-
+  const router = useRouter()
   return (
     <div className='flex bs-full justify-center'>
       <div
@@ -144,7 +144,15 @@ const TwoStepsV2 = ({ mode }) => {
                 )}
               />
             </div>
-            <Button fullWidth variant='contained' type='submit'>
+            <Button
+              fullWidth
+              variant='contained'
+              type='submit'
+              onClick={e => {
+                e.preventDefault()
+                router.push('/')
+              }}
+            >
               Verify my account
             </Button>
             <div className='flex justify-center items-center flex-wrap gap-2'>

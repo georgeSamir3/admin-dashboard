@@ -21,6 +21,7 @@ import CustomTextField from '@core/components/mui/TextField'
 // Hook Imports
 import { useImageVariant } from '@core/hooks/useImageVariant'
 import { useSettings } from '@core/hooks/useSettings'
+import { useRouter } from 'next/navigation'
 
 // Util Imports
 import { getLocalizedUrl } from '@/utils/i18n'
@@ -63,7 +64,7 @@ const ForgotPassword = ({ mode }) => {
   const hidden = useMediaQuery(theme.breakpoints.down('md'))
   const authBackground = useImageVariant(mode, lightImg, darkImg)
   const characterIllustration = useImageVariant(mode, lightIllustration, darkIllustration)
-
+  const router = useRouter()
   return (
     <div className='flex bs-full justify-center'>
       <div
@@ -89,7 +90,15 @@ const ForgotPassword = ({ mode }) => {
             <Typography variant='h4'>Forgot Password 🔒</Typography>
             <Typography>Enter your email and we&#39;ll send you instructions to reset your password</Typography>
           </div>
-          <form noValidate autoComplete='off' onSubmit={e => e.preventDefault()} className='flex flex-col gap-6'>
+          <form
+            noValidate
+            autoComplete='off'
+            onSubmit={e => {
+              e.preventDefault()
+              router.push('pages/auth/reset-password-v2')
+            }}
+            className='flex flex-col gap-6'
+          >
             <CustomTextField autoFocus fullWidth label='Email' placeholder='Enter your email' />
             <Button fullWidth variant='contained' type='submit'>
               Send Reset Link

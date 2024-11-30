@@ -19,7 +19,7 @@ import Logo from '@components/layout/shared/Logo'
 // Hook Imports
 import { useImageVariant } from '@core/hooks/useImageVariant'
 import { useSettings } from '@core/hooks/useSettings'
-import { useRouter } from 'next/navigation'
+
 // Util Imports
 import { getLocalizedUrl } from '@/utils/i18n'
 
@@ -61,7 +61,7 @@ const VerifyEmailV2 = ({ mode }) => {
   const hidden = useMediaQuery(theme.breakpoints.down('md'))
   const authBackground = useImageVariant(mode, lightImg, darkImg)
   const characterIllustration = useImageVariant(mode, lightIllustration, darkIllustration)
-  const router = useRouter()
+
   return (
     <div className='flex bs-full justify-center'>
       <div
@@ -97,16 +97,7 @@ const VerifyEmailV2 = ({ mode }) => {
               continue.
             </Typography>
           </div>
-          <Button
-            fullWidth
-            variant='contained'
-            type='submit'
-            className='mbe-5'
-            onClick={e => {
-              e.preventDefault()
-              router.push('/')
-            }}
-          >
+          <Button fullWidth variant='contained' type='submit' className='mbe-5'>
             Skip For Now
           </Button>
           <div className='flex justify-center items-center flex-wrap gap-2'>
