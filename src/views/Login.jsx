@@ -31,7 +31,6 @@ import themeConfig from '@configs/themeConfig'
 // Hook Imports
 import { useImageVariant } from '@core/hooks/useImageVariant'
 import { useSettings } from '@core/hooks/useSettings'
-
 // Styled Custom Components
 const LoginIllustration = styled('img')(({ theme }) => ({
   zIndex: 2,
@@ -141,18 +140,42 @@ const LoginV2 = ({ mode }) => {
             />
             <div className='flex justify-between items-center gap-x-3 gap-y-1 flex-wrap'>
               <FormControlLabel control={<Checkbox />} label='Remember me' />
-              <Typography className='text-end' color='primary' component={Link}>
+              <Typography
+                className='text-end'
+                color='primary'
+                component={Link}
+                onClick={e => {
+                  e.preventDefault()
+                  router.push('/forgot-password')
+                }}
+              >
                 Forgot password?
               </Typography>
+              {/* <Link>Forgot password?</Link> */}
             </div>
             <Button fullWidth variant='contained' type='submit'>
               Login
             </Button>
             <div className='flex justify-center items-center flex-wrap gap-2'>
               <Typography>New on our platform?</Typography>
-              <Typography component={Link} color='primary'>
+              {/* <Typography
+                component={Link}
+                color='primary'
+                onClick={() => {
+                  router.push('/register')
+                }}
+              >
                 Create an account
-              </Typography>
+              </Typography> */}
+              <Button
+                variant='text'
+                onClick={e => {
+                  e.preventDefault()
+                  router.push('/register')
+                }}
+              >
+                Create an account
+              </Button>
             </div>
             <Divider className='gap-2 text-textPrimary'>or</Divider>
             <div className='flex justify-center items-center gap-1.5'>
