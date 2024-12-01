@@ -118,7 +118,7 @@ const LoginV2 = ({ mode }) => {
             onSubmit={e => {
               e.preventDefault()
               // router.push('/')
-              router.push('pages/auth/two-steps-v2')
+              router.push('two-steps')
             }}
             className='flex flex-col gap-5'
           >

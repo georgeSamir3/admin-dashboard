@@ -116,7 +116,7 @@ const Register = ({ mode }) => {
             autoComplete='off'
             onSubmit={e => {
               e.preventDefault()
-              router.push('pages/auth/verify-email-v2')
+              router.push('verify-email')
             }}
             className='flex flex-col gap-6'
           >
