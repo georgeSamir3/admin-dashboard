@@ -84,6 +84,21 @@ const VerticalMenu = ({ dictionary, scrollMenu }) => {
           <MenuItem href={`/${locale}/apps/chat`} icon={<i className='tabler-message-circle-2' />}>
             {dictionary['navigation'].chat}
           </MenuItem>
+          <MenuItem href={`/${locale}/apps/chat`} icon={<i className='tabler-message-circle-2' />}>
+            {dictionary['navigation'].contractsManagement}
+          </MenuItem>
+          <MenuItem href={`/${locale}/apps/chat`} icon={<i className='tabler-message-circle-2' />}>
+            {dictionary['navigation'].invoiceCenter}
+          </MenuItem>
+          <MenuItem href={`/${locale}/apps/chat`} icon={<i className='tabler-message-circle-2' />}>
+            {dictionary['navigation'].paymentsTransfers}
+          </MenuItem>
+          <MenuItem href={`/${locale}/apps/chat`} icon={<i className='tabler-message-circle-2' />}>
+            {dictionary['navigation'].reportsAnalytics}
+          </MenuItem>
+          <MenuItem href={`/${locale}/apps/chat`} icon={<i className='tabler-message-circle-2' />}>
+            {dictionary['navigation'].Settings}
+          </MenuItem>
           {/* <SubMenu label={dictionary['navigation'].authPages} icon={<i className='tabler-shield-lock' />}>
             <SubMenu label={dictionary['navigation'].login}>
               <MenuItem href={`/${locale}/pages/auth/login-v1`} target='_blank'>
