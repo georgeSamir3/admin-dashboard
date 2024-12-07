@@ -30,6 +30,7 @@ const Layout = async ({ children, params }) => {
   const dictionary = await getDictionary(params.lang)
   const mode = getMode()
   const systemMode = getSystemMode()
+
   console.log('color', systemMode)
 
   return (

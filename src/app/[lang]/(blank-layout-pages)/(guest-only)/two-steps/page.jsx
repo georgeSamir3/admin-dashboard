@@ -6,6 +6,8 @@ import { useState } from 'react'
 // Next Imports
 import { useParams } from 'next/navigation'
 import { useRouter } from 'next/navigation'
+
+
 // MUI Imports
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { styled, useTheme } from '@mui/material/styles'
@@ -91,7 +93,9 @@ const TwoStepsV2 = ({ mode }) => {
   const authBackground = useImageVariant(mode, lightImg, darkImg)
   const characterIllustration = useImageVariant(mode, lightIllustration, darkIllustration)
   const router = useRouter()
-  return (
+
+  
+return (
     <div className='flex bs-full justify-center'>
       <div
         className={classnames(

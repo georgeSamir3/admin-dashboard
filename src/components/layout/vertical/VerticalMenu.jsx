@@ -43,6 +43,7 @@ const VerticalMenu = ({ dictionary, scrollMenu }) => {
     // eslint-disable-next-line lines-around-comment
     /* Custom scrollbar instead of browser scroll, remove if you want browser scroll only */
     <ScrollWrapper
+
       // style={{ backgroundColor: 'black' }}
       {...(isBreakpointReached
         ? {
@@ -66,6 +67,7 @@ const VerticalMenu = ({ dictionary, scrollMenu }) => {
         <MenuItem
           href={`/${locale}/dashboard`}
           icon={<i className='tabler-home' />}
+
           // exactMatch={false}
           activeUrl='/dashboard'
         >

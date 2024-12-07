@@ -10,5 +10,7 @@ const dictionaries = {
 // export const getDictionary = async locale => dictionaries[locale]()
 export const getDictionary = async locale => {
   const selectedLocale = dictionaries[locale] ? locale : 'en' // Default to 'en' if locale is unavailable
-  return dictionaries[selectedLocale]()
+
+  
+return dictionaries[selectedLocale]()
 }

@@ -31,6 +31,8 @@ import themeConfig from '@configs/themeConfig'
 // Hook Imports
 import { useImageVariant } from '@core/hooks/useImageVariant'
 import { useSettings } from '@core/hooks/useSettings'
+
+
 // Styled Custom Components
 const LoginIllustration = styled('img')(({ theme }) => ({
   zIndex: 2,
@@ -117,6 +119,7 @@ const LoginV2 = ({ mode }) => {
             autoComplete='off'
             onSubmit={e => {
               e.preventDefault()
+
               // router.push('/')
               router.push('two-steps')
             }}

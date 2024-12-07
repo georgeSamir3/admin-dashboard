@@ -1,32 +1,40 @@
 'use client'
 
 // React Imports
+
 import { useEffect, useRef } from 'react'
 
 // Third-party Imports
+
 import classnames from 'classnames'
 
 // Hook Imports
+
 import useMediaQuery from '../../hooks/useMediaQuery'
 import useVerticalNav from '../../hooks/useVerticalNav'
 
 // Util Imports
+
 import { verticalNavClasses } from '../../utils/menuClasses'
 
 // Styled Component Imports
+
 import StyledBackdrop from '../../styles/StyledBackdrop'
 import StyledVerticalNav from '../../styles/vertical/StyledVerticalNav'
 import StyledVerticalNavContainer from '../../styles/vertical/StyledVerticalNavContainer'
 import StyledVerticalNavBgColorContainer from '../../styles/vertical/StyledVerticalNavBgColorContainer'
 
 // Style Imports
+
 import styles from '../../styles/vertical/verticalNavBgImage.module.css'
 
 // Default Config Imports
+
 import { defaultBreakpoints, verticalNavToggleDuration } from '../../defaultConfigs'
 
 const VerticalNav = props => {
   // Props
+
   const {
     width = 260,
     collapsedWidth = 80,
@@ -46,12 +54,15 @@ const VerticalNav = props => {
   } = props
 
   // Vars
+
   const mergedBreakpoints = { ...defaultBreakpoints, ...breakpoints }
 
   // Refs
+
   const verticalNavCollapsedRef = useRef(false)
 
   // Hooks
+
   const {
     updateVerticalNavState,
     isCollapsed: isCollapsedContext,
@@ -179,6 +190,7 @@ const VerticalNav = props => {
         <StyledVerticalNavBgColorContainer
           style={{ color: 'white' }}
           className={verticalNavClasses.bgColorContainer}
+
           // backgroundColor={backgroundColor}
           backgroundColor={'#2f3349'}
         >

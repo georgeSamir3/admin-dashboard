@@ -2,7 +2,7 @@
 
 // Next Imports
 import Link from 'next/link'
-import { useParams } from 'next/navigation'
+import { useParams , useRouter } from 'next/navigation'
 
 // MUI Imports
 import useMediaQuery from '@mui/material/useMediaQuery'
@@ -21,7 +21,6 @@ import CustomTextField from '@core/components/mui/TextField'
 // Hook Imports
 import { useImageVariant } from '@core/hooks/useImageVariant'
 import { useSettings } from '@core/hooks/useSettings'
-import { useRouter } from 'next/navigation'
 
 // Util Imports
 import { getLocalizedUrl } from '@/utils/i18n'
@@ -65,7 +64,9 @@ const ForgotPassword = ({ mode }) => {
   const authBackground = useImageVariant(mode, lightImg, darkImg)
   const characterIllustration = useImageVariant(mode, lightIllustration, darkIllustration)
   const router = useRouter()
-  return (
+
+  
+return (
     <div className='flex bs-full justify-center'>
       <div
         className={classnames(

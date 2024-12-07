@@ -4,6 +4,8 @@
 import { useParams } from 'next/navigation'
 
 // MUI Imports
+import { useRouter } from 'next/navigation'
+
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { styled, useTheme } from '@mui/material/styles'
 import Typography from '@mui/material/Typography'
@@ -19,7 +21,7 @@ import Logo from '@components/layout/shared/Logo'
 // Hook Imports
 import { useImageVariant } from '@core/hooks/useImageVariant'
 import { useSettings } from '@core/hooks/useSettings'
-import { useRouter } from 'next/navigation'
+
 // Util Imports
 import { getLocalizedUrl } from '@/utils/i18n'
 
@@ -62,7 +64,9 @@ const VerifyEmailV2 = ({ mode }) => {
   const authBackground = useImageVariant(mode, lightImg, darkImg)
   const characterIllustration = useImageVariant(mode, lightIllustration, darkIllustration)
   const router = useRouter()
-  return (
+
+  
+return (
     <div className='flex bs-full justify-center'>
       <div
         className={classnames(
