@@ -20,7 +20,8 @@ import { getIcons, getIconsCSS, stringToIcon } from '@iconify/utils'
 const sources = {
   json: [
     // Iconify JSON file (@iconify/json is a package name, /json/ is directory where files are, then filename)
-    require.resolve('@iconify/json/json/tabler.json')
+    // require.resolve('@iconify/json/json/tabler.json')
+    import.meta.resolve('@iconify/json/json/line-md.json')
 
     // Custom file with only few icons
     /* {
